@@ -3,6 +3,7 @@ import api from "@/api";
 import ss from "./sign";
 import ls from "./ls";
 import axios from "axios";
+import router from "vue-router";
 axios.defaults.withCredentials = true;
 import { Message } from "element-ui";
 export let fnObj = {};//方法map
@@ -75,6 +76,10 @@ axios.interceptors.response.use(config => {
     if(code !== 200 && code !== '200') {
         Message.error(msg);
         config.data['flag'] = false;
+        if(code === '-111' || code === -111) {
+            ls.remove("token");
+            router.redirect("/login")
+        }
     }
     return config;
 })
