@@ -28,11 +28,11 @@
                         v-model="checkCode" />
                     </div>
                 </el-form-item>
-                <el-form-item prop="rememberMe">
+                <!-- <el-form-item prop="rememberMe">
                     <el-checkbox 
                     v-model="formData.rememberMe" 
                     label="记住我"/>
-                </el-form-item> 
+                </el-form-item>  -->
             </el-form>
             <el-button 
             :loading="loginLoading"
@@ -51,6 +51,11 @@ export default {
     name: "login",
     components: {
         'check-code': CheckCode
+    },
+    beforeRouteEnter(to,from,next) {
+        if(localStorage.getItem("token")) {
+            next("/");
+        }
     },
     data() {
         const checkValidator = (a,val,cb) => {
@@ -113,6 +118,9 @@ export default {
                 if(valid && checkValidator) {
                     this.login(this.formData).then(flag => {
                         this.$refs['loginForm'].resetFields();
+                        if(flag) {
+                            this.$router.push("/")
+                        }
                     })
                 }
             })
