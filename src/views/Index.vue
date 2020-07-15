@@ -57,6 +57,40 @@
                             </span>
                         </ElBreadcrumbItem>
                 </transition-group>
+                <div class="tool-user-wrap">
+                    <div class="tool">
+                        <i 
+                        @click="requestFullScreen" 
+                        class="el-icon-full-screen"></i>
+                    </div>
+                    <div class="user-wrap">
+                        <el-dropdown @command="handleCommand" command trigger="click">
+                            <el-avatar style="cursor: pointer;" icon="el-icon-user-solid"></el-avatar>
+                            <el-dropdown-menu
+                            slot="dropdown">
+                                <el-dropdown-item command="0">个人中心</el-dropdown-item>
+                                <el-dropdown-item command="1">页面设置</el-dropdown-item>
+                                <el-dropdown-item command="2">退出登陆</el-dropdown-item>
+                            </el-dropdown-menu>
+                        </el-dropdown>
+                        <el-drawer
+                        size="210px"
+                        title="布局设置"
+                        :visible.sync="drawer">
+                            <el-form
+                            label-position="left"
+                            :model="formData">
+                                <el-form-item 
+                                prop="color" 
+                                label="主题色">
+                                    <el-color-picker
+                                    @change="handleThemeColor" 
+                                    v-model="formData.color"/>
+                                </el-form-item>
+                            </el-form>
+                        </el-drawer>
+                    </div>
+                </div>
             </el-header>
             <el-main>
                 <transition name="routerTs">
@@ -68,10 +102,35 @@
 </template>
 <script>
 import {childrenRoute} from "@/router";
+import { changeThemeColor } from "@/until/themeColorClient";
 export default {
     data() {
         return {
             isCollapse: false,
+            drawer: false,
+            formData: {
+                color: localStorage.getItem("theme_color")
+            }
+        }
+    },
+    methods: {
+        handleCommand(command) {
+           if(command == 1) {
+               this.drawer = true
+           }
+        },
+        handleThemeColor(color) {
+            changeThemeColor(color)
+        },
+        requestFullScreen() {
+           const html = document.documentElement;
+            if (html.requestFullscreen) {
+                html.requestFullscreen();
+            } else if (html.mozRequestFullScreen) {
+                html.mozRequestFullScreen();
+            } else if (html.webkitRequestFullScreen) {
+                html.webkitRequestFullScreen();
+            }
         }
     },
     computed: {
@@ -114,10 +173,12 @@ export default {
     transform: translateX(0);
 }
 .routerTs-enter {
+    position: absolute;
     opacity: 0;
     transform: translateX(-20px);
 }
 .routerTs-leave-to {
+    position: absolute;
     opacity: 0;
     transform: translateX(20px);
 }
@@ -135,19 +196,44 @@ export default {
     opacity: 1;
 }
 
+ /deep/ :focus {
+    outline: 0;
+}
+
+@media only screen and(max-width: 1100px) {
+    .el-aside {
+        display: none;
+    }
+}
 .index-wrap {
     height: 100%;
     .el-main {
         overflow: hidden;
+        background-color: rgb(240,242,245);
     }
     .admin-header {
         display: flex;
         align-items: center;
         font-size: 15px;
+        padding: 0 60px 0 30px;
         [class^='el-icon'] {
             font-size: 25px;
             margin-right: 10px;
             cursor: pointer;
+        }
+        
+        .tool-user-wrap {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .tool {
+            > *{
+                padding: 5px;
+                &:hover {
+                    background-color: rgba(192,192,192,.2);
+                }
+            }
         }
     }
 
@@ -175,9 +261,16 @@ export default {
     /deep/ .el-submenu__title:hover{
         background-color: #263445 !important;
     }
+
+    .el-form {
+        padding: 0 50px;
+    }
 }
 </style>
 <style lang="less">
+.el-breadcrumb {
+    flex: 1;
+}
 .el-menu--vertical {
     left: 70px !important;
     background-color: rgb( 48,65,86) !important;
