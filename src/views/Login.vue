@@ -52,11 +52,11 @@ export default {
     components: {
         'check-code': CheckCode
     },
-    beforeRouteEnter(to,from,next) {
-        if(localStorage.getItem("token")) {
-            next("/");
-        }
-    },
+    // beforeRouteEnter(to,from,next) {
+    //     if(localStorage.getItem("token")) {
+    //         next("/");
+    //     }
+    // },
     data() {
         const checkValidator = (a,val,cb) => {
             const result = parseInt(val);
@@ -105,14 +105,14 @@ export default {
                 formData: {checkCode: formCheckCode}
             } = this;
             this.$refs['loginForm'].validate((valid) => {
-                let checkValidator = true;
+                let checkValidator = true;//默认验证码正确
                 const result = parseInt(formCheckCode);
                 if(!(checkCode == result)) {
                     this.$notify({
                         type: "error",
                         message: '验证码错误'
                     });
-                    checkValidator = false;
+                    checkValidator = false;//验证码错误
                     this.$refs['checkCodeDom'].draw();
                 }
                 if(valid && checkValidator) {
@@ -120,6 +120,8 @@ export default {
                         this.$refs['loginForm'].resetFields();
                         if(flag) {
                             this.$router.push("/")
+                        }else {
+                            this.$refs['checkCodeDom'].draw();
                         }
                     })
                 }

@@ -4,6 +4,6 @@ module.exports = (req, res, next) => {
     if(ss(reqData) === req.headers.authorization) {
         next()
     }else {
-        res.status(-601).send({code: -601, msg: "参数错误,错误的sign"})
+        res.status(500).send({code: -1, msg: "参数错误,错误的sign"})
     }
   };

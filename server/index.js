@@ -18,3 +18,4 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(middles.secert)
 app.use('/api/login', routers.loginRouter);
+app.use(middles.auth)
