@@ -16,6 +16,8 @@ app.use(express.static(path.join(__dirname, './static')));
 app.use(express.json());// 添加json解析
 app.use(express.urlencoded({extended: false}));
 
+//格式正确可以请求登陆接口，但是其他接口必须要求令牌不过期，所以登陆放在令牌前，其他接口放在令牌后
 app.use(middles.secert)
 app.use('/api/login', routers.loginRouter);
 app.use(middles.auth)
+app.use('/api/userControl/queryAll', routers.userControl.queryAll)

@@ -19,4 +19,4 @@ let schema = new Schema({
     },
 });
 
-module.exports = mongoose.model("address", schema);
+module.exports = mongoose.model("addresses", schema);

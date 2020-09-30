@@ -3,7 +3,7 @@ import api from "@/api";
 import ss from "./sign";
 import ls from "./ls";
 import axios from "axios";
-import router from "vue-router";
+import router from "@/router";
 axios.defaults.withCredentials = true;
 import { Message } from "element-ui";
 export let fnObj = {};//方法map
@@ -42,7 +42,9 @@ for(let key in api) {
             op['params'] = params;
         }
         //无论怎么样都要情况最后的cancelObj[key]
+        console.log(op)
         return axios(op).then(res => {
+            // console.log(res)
             let { data, list } = res;
             if(data) {
                 res = data;
@@ -53,7 +55,7 @@ for(let key in api) {
         }).catch(err => {
             /(\d+)/g.test(err.message);
             let code = RegExp.$1;
-            Message.error(url + '  ' + (Reflect.has(errorCode,code) ? errorCode[code] : err.message));
+            Message.error(url + '  ' +  err.message);
         })
     }
     
@@ -75,10 +77,11 @@ axios.interceptors.response.use(config => {
     config.data['flag'] = true;
     if(code !== 200 && code !== '200') {
         Message.error(msg);
+        // console.log(code)
         config.data['flag'] = false;
-        if(code === '-111' || code === -111) {
+        if(code === '-101' || code === -101) {
             ls.remove("token");
-            router.redirect("/login")
+            router.push("/login")
         }
     }
     return config;

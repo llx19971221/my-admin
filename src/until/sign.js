@@ -1,5 +1,5 @@
 const md5 = require("md5");
-export const ss = (params) => {
+export const ss = (params = {}) => {
     let date = Date.now();
     params['timeout'] = date;
     let keyArr = Object.keys(params).sort((a,b) => {

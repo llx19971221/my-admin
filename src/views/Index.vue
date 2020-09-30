@@ -84,6 +84,7 @@
                                 prop="color" 
                                 label="主题色">
                                     <el-color-picker
+                                    color-format='hex'
                                     @change="handleThemeColor" 
                                     v-model="formData.color"/>
                                 </el-form-item>
@@ -119,8 +120,8 @@ export default {
                this.drawer = true
            }
         },
-        handleThemeColor(color) {
-            changeThemeColor(color)
+        handleThemeColor() {
+            changeThemeColor(this.formData.color)
         },
         requestFullScreen() {
            const html = document.documentElement;
@@ -144,13 +145,12 @@ export default {
             }else {
                 newRoute[0].meta['link'] = true;
             }
-            // console.log(routes)
             return newRoute;
         },
         childrenRoute() {
-            childrenRoute.shift()
-            // childrenRoute[0].path = '/';
-            return childrenRoute;
+            // childrenRoute.shift();
+            // console.log(childrenRoute)
+            return childrenRoute.slice(1);
         }
     }
 }

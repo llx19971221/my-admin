@@ -4,19 +4,20 @@ const jwt = require("jsonwebtoken");
 const request = require("request");
 const iconvLite = require('iconv-lite');
 const {login: loginModel, address} = require("../dataBase/schema");
+
+
 router.post("/", (req, response) => {
-    const { body: {userName, password}, headers } = req;
-    console.log(headers)
-    const ip = headers.origin.match(/\d{2,3}\.\d{2,3}\.\d{2,3}\.\d{2,3}/g)[0];//拿到IP
+    const { body: {userName, password, ip} } = req;
     loginModel.find({
         userName,
         password
     }).then(async (result) => {
         let len = result.length;
-        if(len === 0) {
-            response.send({code: -1, msg: "账号或密码错误"})
+        if(len === 0 || !result) {
+            response.send({code: -102, msg: "账号或密码错误"})
         }else {
             let user = result[0];//用户名
+            user = {userName: user.userName, isSuper: user.isSuper, createTime: user.createTime}
             let num = await address.countDocuments({
                 ip
             });//查询是否存在ip
@@ -59,6 +60,6 @@ router.post("/", (req, response) => {
 })
 
 const createToken = (payload) => {
-    return jwt.sign(payload, 'llx', {expiresIn: 30});
+    return jwt.sign(payload, 'llx', {expiresIn: '3m'});
 }
 module.exports = router;

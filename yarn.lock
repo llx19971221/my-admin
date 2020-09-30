@@ -144,6 +144,14 @@
   dependencies:
     "@babel/types" "^7.10.4"
 
+"@babel/helper-module-imports@7.0.0-beta.35":
+  version "7.0.0-beta.35"
+  resolved "https://registry.npm.taobao.org/@babel/helper-module-imports/download/@babel/helper-module-imports-7.0.0-beta.35.tgz#308e350e731752cdb4d0f058df1d704925c64e0a"
+  integrity sha1-MI41DnMXUs200PBY3x1wSSXGTgo=
+  dependencies:
+    "@babel/types" "7.0.0-beta.35"
+    lodash "^4.2.0"
+
 "@babel/helper-module-imports@^7.0.0", "@babel/helper-module-imports@^7.10.4", "@babel/helper-module-imports@^7.8.3":
   version "7.10.4"
   resolved "https://registry.npm.taobao.org/@babel/helper-module-imports/download/@babel/helper-module-imports-7.10.4.tgz#4c5c54be04bd31670a7382797d75b9fa2e5b5620"
@@ -812,6 +820,15 @@
     debug "^4.1.0"
     globals "^11.1.0"
     lodash "^4.17.13"
+
+"@babel/types@7.0.0-beta.35":
+  version "7.0.0-beta.35"
+  resolved "https://registry.npm.taobao.org/@babel/types/download/@babel/types-7.0.0-beta.35.tgz?cache=0&sync_timestamp=1598904189191&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Ftypes%2Fdownload%2F%40babel%2Ftypes-7.0.0-beta.35.tgz#cf933a9a9a38484ca724b335b88d83726d5ab960"
+  integrity sha1-z5M6mpo4SEynJLM1uI2Dcm1auWA=
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.2.0"
+    to-fast-properties "^2.0.0"
 
 "@babel/types@^7.10.4", "@babel/types@^7.4.4", "@babel/types@^7.7.0":
   version "7.10.4"
@@ -1657,6 +1674,13 @@ babel-loader@^8.1.0:
     mkdirp "^0.5.3"
     pify "^4.0.1"
     schema-utils "^2.6.5"
+
+babel-plugin-component@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npm.taobao.org/babel-plugin-component/download/babel-plugin-component-1.1.1.tgz#9b023a23ff5c9aae0fd56c5a18b9cab8c4d45eea"
+  integrity sha1-mwI6I/9cmq4P1WxaGLnKuMTUXuo=
+  dependencies:
+    "@babel/helper-module-imports" "7.0.0-beta.35"
 
 babel-plugin-dynamic-import-node@^2.3.3:
   version "2.3.3"
@@ -5331,6 +5355,11 @@ lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.19.tgz?cache=0&sync_timestamp=1594226805918&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha1-5I3e2+MLMyF4PFtDAfvTU7weSks=
 
+lodash@^4.2.0:
+  version "4.17.20"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.20.tgz?cache=0&sync_timestamp=1599037469831&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
+  integrity sha1-tEqbYpe8tpjxxRo1RaKzs2jVnFI=
+
 log-symbols@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npm.taobao.org/log-symbols/download/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
@@ -8513,10 +8542,10 @@ webpack-sources@*, webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sourc
     source-list-map "^2.0.0"
     source-map "~0.6.1"
 
-webpack-theme-color-replacer@^1.3.13:
-  version "1.3.13"
-  resolved "https://registry.npm.taobao.org/webpack-theme-color-replacer/download/webpack-theme-color-replacer-1.3.13.tgz#85178e42f1f09be94bb264d704903276e5e49e02"
-  integrity sha1-hReOQvHwm+lLsmTXBJAyduXkngI=
+webpack-theme-color-replacer@^1.3.2:
+  version "1.3.14"
+  resolved "https://registry.npm.taobao.org/webpack-theme-color-replacer/download/webpack-theme-color-replacer-1.3.14.tgz#2bdc9b29e708aa90ca56afce64955692c5050b8b"
+  integrity sha1-K9ybKecIqpDKVq/OZJVWksUFC4s=
   dependencies:
     webpack-sources "*"
 

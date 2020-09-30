@@ -17,11 +17,11 @@ module.exports = {
             // },
             
             // externalCssFiles: ['./node_modules/element-ui/lib/theme-chalk/index.css'], // optional, String or string array. Set external css files (such as cdn css) to extract colors.
-            changeSelector: forElementUI.changeSelector, // optional, Funciton. Changing css selectors, in order to raise css priority, to resolve lazy-loading problems.
+            // changeSelector: forElementUI.changeSelector, // optional, Funciton. Changing css selectors, in order to raise css priority, to resolve lazy-loading problems.
             //     return util.changeEach(selector, '.el-button--default')
             // },
-            // injectCss: false, // optional. Inject css text into js file, no need to download `theme-colors-xxx.css` any more.
-            isJsUgly: process.env.NODE_ENV !== 'development',
+            injectCss: false, // optional. Inject css text into js file, no need to download `theme-colors-xxx.css` any more.
+            isJsUgly: process.env.NODE_ENV === 'production' ? true : undefined,
         })
         ]
     },
@@ -53,5 +53,17 @@ module.exports = {
         //     // injectCss: false, // optional. Inject css text into js file, no need to download `theme-colors-xxx.css` any more.
         //     isJsUgly: process.env.NODE_ENV !== 'development',
         // })
+    },
+    devServer: {
+        proxy: {
+            '/api': {
+                target: "http://localhost:1234",
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': "/api"
+                }
+            }
+        }
     }
+    
 }
